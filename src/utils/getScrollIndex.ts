@@ -13,3 +13,18 @@ export const getScrollIndex = (variables: {
         (padWithNItems - 1)
     );
 };
+
+export const getScrollIndexForPricePicker = (variables: {
+    numberOfItems: number;
+    padWithNItems: number;
+    disableInfiniteScroll?: boolean;
+}) => {
+    const { numberOfItems, padWithNItems, disableInfiniteScroll } = variables;
+    const value = -numberOfItems - 1;
+
+    return (
+        ((value + numberOfItems) % (numberOfItems * 3)) +
+        (disableInfiniteScroll ? padWithNItems : 0) -
+        (padWithNItems - 1)
+    );
+};
