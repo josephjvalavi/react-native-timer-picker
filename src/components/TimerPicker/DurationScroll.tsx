@@ -22,7 +22,10 @@ import {
 import { colorToRgba } from "../../utils/colorToRgba";
 import { generateStyles } from "./TimerPicker.styles";
 import { getAdjustedLimit } from "../../utils/getAdjustedLimit";
-import { getScrollIndex } from "../../utils/getScrollIndex";
+import {
+    getScrollIndex,
+    getScrollIndexForPricePicker,
+} from "../../utils/getScrollIndex";
 
 export interface DurationScrollRef {
     reset: (options?: { animated?: boolean }) => void;
@@ -113,10 +116,7 @@ const DurationScroll = forwardRef<DurationScrollRef, DurationScrollProps>(
                   centDataIterationValue,
                   {
                       padNumbersWithZero,
-                      repeatNTimes:
-                          isPricePicker && numberOfItems == centDataLimit
-                              ? 1
-                              : 3,
+                      repeatNTimes: isPricePicker ? 1 : 3,
                       disableInfiniteScroll,
                       padWithNItems,
                   }
@@ -132,12 +132,18 @@ const DurationScroll = forwardRef<DurationScrollRef, DurationScrollProps>(
 
         const adjustedLimited = getAdjustedLimit(limit, numberOfItems);
 
-        const initialScrollIndex = getScrollIndex({
-            value: initialValue,
-            numberOfItems,
-            padWithNItems,
-            disableInfiniteScroll,
-        });
+        const initialScrollIndex = isPricePicker
+            ? getScrollIndexForPricePicker({
+                  numberOfItems,
+                  padWithNItems,
+                  disableInfiniteScroll,
+              })
+            : getScrollIndex({
+                  value: initialValue,
+                  numberOfItems,
+                  padWithNItems,
+                  disableInfiniteScroll,
+              });
 
         const latestDuration = useRef(0);
 
