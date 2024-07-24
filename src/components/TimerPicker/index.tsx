@@ -176,7 +176,7 @@ const TimerPicker = forwardRef<TimerPickerRef, TimerPickerProps>(
                     <DurationScroll
                         ref={hoursDurationScrollRef}
                         numberOfItems={dollorDataLimit ?? 23}
-                        label={isPricePicker ? "$" : "hr"}
+                        label={isPricePicker ? "$" : hourLabel ?? "hr"}
                         initialValue={initialHours}
                         allowFontScaling={allowFontScaling}
                         aggressivelyGetLatestDuration={
@@ -207,7 +207,7 @@ const TimerPicker = forwardRef<TimerPickerRef, TimerPickerProps>(
                     <DurationScroll
                         ref={minutesDurationScrollRef}
                         numberOfItems={centDataLimit ?? 59}
-                        label={isPricePicker ? "¢" : "min"}
+                        label={isPricePicker ? "¢" : minuteLabel ?? "min"}
                         initialValue={initialMinutes}
                         allowFontScaling={allowFontScaling}
                         aggressivelyGetLatestDuration={
